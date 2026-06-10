@@ -1108,3 +1108,65 @@ source ~/envs/quant/bin/activate
 *Installation completed: June 2026*
 *Machine: ThinkPad T14s Gen 1 · Intel i7 10th Gen · 16GB RAM · Arch Linux LTS*
 *User: nikhil · Hostname: t14s*
+
+---
+
+## 25. Dotfiles and Scripts
+
+All configuration files and scripts for this setup live in the GitHub repo:
+
+**[phy-nikhilroy/t14s-dotfiles-and-scripts](https://github.com/phy-nikhilroy/t14s-dotfiles-and-scripts)**
+
+```
+dotfiles/
+├── alacritty/       # Terminal config (60% opacity, Shift+Enter binding)
+├── bspwm/           # bspwmrc — monitor naming, colors, autostart
+├── sxhkd/           # sxhkdrc — all keybindings
+├── polybar/         # Catppuccin Mocha bar, ThinkPad modules (BAT0, wlp0s20f3, thermal)
+├── nvim/            # Full Neovim config (lazy.nvim, Mason LSP, fzf-lua, Gemini AI)
+└── scripts/
+    └── maintain     # System maintenance script (see below)
+```
+
+Configs are symlinked into `~/.config/`:
+
+```bash
+ln -s ~/dotfiles/alacritty   ~/.config/alacritty
+ln -s ~/dotfiles/bspwm       ~/.config/bspwm
+ln -s ~/dotfiles/sxhkd       ~/.config/sxhkd
+ln -s ~/dotfiles/polybar     ~/.config/polybar
+ln -s ~/dotfiles/nvim        ~/.config/nvim
+ln -s ~/dotfiles/scripts/maintain  ~/.local/bin/maintain
+```
+
+---
+
+## 26. System Maintenance Script
+
+A single script `maintain` (symlinked to `~/.local/bin/maintain`) handles all routine upkeep. Run it whenever you want to clean and update the system:
+
+```bash
+maintain
+```
+
+### What it does, in order:
+
+1. **Dependency check** — verifies `paccache` and `reflector` are present; offers to install them if missing.
+
+2. **System update** — runs `pacman -Syu`; also runs `yay -Syu` or `paru -Syu` if an AUR helper is found.
+
+3. **Pacman cache cleanup** — uses `paccache -r` (keep last 3 versions per package) and `paccache -ruk0` (remove cache for uninstalled packages). Falls back to `pacman -Sc` with a confirmation prompt if paccache is absent.
+
+4. **Orphan removal** — finds packages with no dependents (`pacman -Qtdq`) and offers to remove them with `pacman -Rns`.
+
+5. **Home cache cleanup** — shows `~/.cache` size and asks before clearing it.
+
+6. **Systemd journal vacuum** — removes journal entries older than 7 days and caps total journal size at 100 MB.
+
+7. **Mirror list refresh** — uses `reflector` to find the 10 fastest HTTPS mirrors, auto-detecting your country via `ipinfo.io`. Falls back to worldwide mirrors if detection fails.
+
+8. **Broken symlink scan** — finds all broken symlinks under `~/` and offers to remove them one by one.
+
+9. **Disk usage diff** — shows disk usage before and after, and reports how much space was freed.
+
+All steps print colored output (`[OK]`, `[SKIP]`, `[WARN]`, `[FAIL]`) and destructive steps ask for confirmation before acting.
