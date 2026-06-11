@@ -7,6 +7,7 @@ This repository tracks my technical progress and learning notes.
 - [Setting up a VPS](my_vps_setup.md)
 - [Deploying Hyperion](hyperion-deployment-blog.md)
 - [Setting up Arch + bspwm on my ThinkPad T14s Gen 1](arch-bspwm-thinkpad-t14s.md)
+- [Unifying Terminal Font Rendering Across Alacritty and Kitty on Arch Linux (bspwm)](terminal-font-dpi-setup.md)
 
 ---
-Last updated: June 10, 2026
+Last updated: June 11, 2026
