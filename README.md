@@ -12,6 +12,7 @@ This repository tracks my technical progress and learning notes.
 - [Command-Line Verification Techniques, From Building claude-usage and agyusage](cli-testing-mastery.md)
 - [AUR, pacman, and Cross-Distro Packaging: How They Actually Work](demystifying-arch-packaging.md)
 - [Choosing an Install Method for opencode, and the Node vs Deno vs Bun Rabbit Hole](opencode-and-js-runtimes.md)
+- [Understanding LLM Harnesses: From Model to Layers to LangChain](llm-harness-and-inference-layers.md)
 
 ---
-Last updated: July 2, 2026
+Last updated: July 5, 2026
