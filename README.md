@@ -13,6 +13,7 @@ This repository tracks my technical progress and learning notes.
 - [AUR, pacman, and Cross-Distro Packaging: How They Actually Work](demystifying-arch-packaging.md)
 - [Choosing an Install Method for opencode, and the Node vs Deno vs Bun Rabbit Hole](opencode-and-js-runtimes.md)
 - [Understanding LLM Harnesses: From Model to Layers to LangChain](llm-harness-and-inference-layers.md)
+- [From Zero to a Bootable Sandbox: Setting Up My First Local Debian VM with QEMU/KVM](local-debian-vm-qemu-kvm-setup.md)
 
 ---
-Last updated: July 5, 2026
+Last updated: July 7, 2026
